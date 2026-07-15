@@ -45,10 +45,13 @@ export default function Home() {
     formData.append('file', file);
 
     try {
-      // Points directly to the live local engine tunnel
+      // Points directly to the live local engine tunnel WITH the bypass header
       const response = await fetch('https://tranquil-scotch-winner.ngrok-free.dev/api/analyze', {
         method: 'POST',
         body: formData,
+        headers: {
+          'ngrok-skip-browser-warning': 'true' // Forces Ngrok to let the JSON through
+        }
       });
 
       const data = await response.json();
@@ -114,7 +117,7 @@ ${report.threatList && report.threatList.length > 0
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e9_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e9_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_40%,#000_70%,transparent_100%)]"></div>
       </div>
       
-      {/* 2. Glowing Data Orbs (Powers the Glass Reflection) */}
+      {/* 2. Glowing Data Orbs (Powers the Glass Reflection) - Cranked up visibility */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/40 rounded-full blur-[100px] z-0 pointer-events-none animate-pulse"></div>
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-600/40 rounded-full blur-[90px] z-0 pointer-events-none"></div>
 
